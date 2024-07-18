@@ -1,243 +1,364 @@
 %-------------------------
 % Resume in Latex
-% Author : Sushmanth
+% Author : Chintalapudi Sushmanth 
 % License : MIT
 %------------------------
 
-\documentclass[letterpaper,11pt]{article}
-\setlength{\footskip}{4.08003pt}
+%---- Required Packages and Functions ----
+
+\documentclass[a4paper,11pt]{article}
 \usepackage{latexsym}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{ragged2e}
 \usepackage[empty]{fullpage}
+\usepackage{wrapfig}
+\usepackage{lipsum}
+\usepackage{tabularx}
 \usepackage{titlesec}
+\usepackage{geometry}
 \usepackage{marvosym}
-\usepackage[usenames,dvipsnames]{color}
 \usepackage{verbatim}
 \usepackage{enumitem}
 \usepackage[hidelinks]{hyperref}
 \usepackage{fancyhdr}
-\usepackage[english]{babel}
-\usepackage{tabularx}
-\usepackage{fontawesome}
-\input{glyphtounicode}
-
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{cfr-lm}
+\usepackage[T1]{fontenc}
+\setlength{\multicolsep}{0pt} 
 \pagestyle{fancy}
 \fancyhf{} % clear all header and footer fields
 \fancyfoot{}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
-
+\geometry{left=1.4cm, top=0.8cm, right=1.2cm, bottom=1cm}
 % Adjust margins
-\addtolength{\oddsidemargin}{-0.5in}
-\addtolength{\evensidemargin}{-0.5in}
-\addtolength{\textwidth}{1in}
-\addtolength{\topmargin}{-.5in}
-\addtolength{\textheight}{1.0in}
+%\addtolength{\oddsidemargin}{-0.5in}
+%\addtolength{\evensidemargin}{-0.5in}
+%\addtolength{\textwidth}{1in}
+\usepackage[most]{tcolorbox}
+\tcbset{
+	frame code={}
+	center title,
+	left=0pt,
+	right=0pt,
+	top=0pt,
+	bottom=0pt,
+	colback=gray!20,
+	colframe=white,
+	width=\dimexpr\textwidth\relax,
+	enlarge left by=-2mm,
+	boxsep=4pt,
+	arc=0pt,outer arc=0pt,
+}
 
 \urlstyle{same}
 
-\raggedbottom
 \raggedright
 \setlength{\tabcolsep}{0in}
 
 % Sections formatting
 \titleformat{\section}{
   \vspace{-4pt}\scshape\raggedright\large
-}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
-
-% Ensure that generate pdf is machine readable/ATS parsable
-\pdfgentounicode=1
+}{}{0em}{}[\color{black}\titlerule \vspace{-7pt}]
 
 %-------------------------
 % Custom commands
 \newcommand{\resumeItem}[2]{
-  \item\small{
-    \textbf{#1}{: #2 \vspace{-2pt}}
+  \item{
+    \textbf{#1}{:\hspace{0.5mm}#2 \vspace{-0.5mm}}
   }
 }
 
-% Just in case someone needs a heading that does not need to be in a list
-\newcommand{\resumeHeading}[4]{
-    \begin{tabular*}{0.99\textwidth}[t]{l@{\extracolsep{\fill}}r}
-      \textbf{#1} & #2 \\
-      \textit{\small#3} & \textit{\small #4} \\
-    \end{tabular*}\vspace{-5pt}
+\newcommand{\resumePOR}[3]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1},\hspace{0.3mm}#2 & \textit{\small{#3}} 
+    \end{tabular*}
+    \vspace{-2mm}
 }
 
 \newcommand{\resumeSubheading}[4]{
-  \vspace{-1pt}\item
-    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
-      \textbf{#1} & #2 \\
-      \textit{\small#3} & \textit{\small #4} \\
-    \end{tabular*}\vspace{-5pt}
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1} & \textit{\footnotesize{#4}} \\
+        \textit{\footnotesize{#3}} &  \footnotesize{#2}\\
+    \end{tabular*}
+    \vspace{-2.4mm}
 }
 
-\newcommand{\resumeSubSubheading}[2]{
-    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
-      \textit{\small#1} & \textit{\small #2} \\
-    \end{tabular*}\vspace{-5pt}
+\newcommand{\resumeProject}[4]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1} & \textit{\footnotesize{#3}} \\
+        \footnotesize{\textit{#2}} & \footnotesize{#4}
+    \end{tabular*}
+    \vspace{-2.4mm}
 }
 
 \newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}\vspace{-4pt}}
 
-\renewcommand{\labelitemii}{$\circ$}
+% \renewcommand{\labelitemii}{$\circ$}
+\renewcommand{\labelitemi}{$\vcenter{\hbox{\tiny$\bullet$}}$}
 
-\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*]}
-\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
-\newcommand{\resumeItemListStart}{\begin{itemize}}
-\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*,labelsep=0mm]}
+\newcommand{\resumeHeadingSkillStart}{\begin{itemize}[leftmargin=*,itemsep=1.7mm, rightmargin=2ex]}
+\newcommand{\resumeItemListStart}{\begin{justify}\begin{itemize}[leftmargin=3ex, rightmargin=2ex, noitemsep,labelsep=1.2mm,itemsep=0mm]\small}
+
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}\vspace{2mm}}
+\newcommand{\resumeHeadingSkillEnd}{\end{itemize}\vspace{-2mm}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\end{justify}\vspace{-2mm}}
+\newcommand{\cvsection}[1]{%
+\vspace{2mm}
+\begin{tcolorbox}
+    \textbf{\large #1}
+\end{tcolorbox}
+    \vspace{-4mm}
+}
+
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}%
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}%
+\newcolumntype{C}{>{\centering\arraybackslash}X}%
+%---- End of Packages and Functions ------
 
 %-------------------------------------------
-%%%%%%  CV STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%  CV STARTS HERE  %%%%%%%%%%%
+%%%%%% DEFINE ELEMENTS HERE %%%%%%%
+\newcommand{\name}{Chintalapudi Sushmanth} % Your Name
+\newcommand{\course}{B.Tech - Computer Science and Engineering} % Your Course can be added like Electronics and Communication Engineering 
+\newcommand{\roll}{21115} % Your Roll No.
+\newcommand{\phone}{9391495835} % Your Phone Number
+\newcommand{\emaila}{sushmanth.chintalapudi@gmail.com} %Email 1
+\newcommand{\github}{0xSushmanth} %Github
+\newcommand{\website}{https://www.datascienceportfol.io/0xSushmanth} %Website
+\newcommand{\linkedin}{0xSushmanth} %linkedin
+
+
 
 
 \begin{document}
-\setlength{\footskip}{4.08003pt}
+\fontfamily{cmr}\selectfont
 %----------HEADING-----------------
-\begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
-  \textbf{{\Large Sushmanth Chintalapudi}} & \faEnvelope \hspace{.5pt}  \href{mailto:sushmanth.chintalapudi@gmail.com}{sushmanth.chintalapudi@gmail.com}\\
-      \faLinkedinSquare \hspace{.5pt} \href{https://www.linkedin.com/in/sushmanth-chintalapudi/}{Linkedin} & \faMobile \hspace{.5pt}  \href{tel:+919391495835}{+919391495835} \\
-  \faGithub \hspace{.5pt} \href{https://github.com/0xSushmanth}{Github} &
-  \faMapMarker \hspace{.5pt}  \href{https://goo.gl/maps/peYXi7YzaWzj1LhG7}{Rajamahendravaram , AP}
-\end{tabular*}
-\smallskip
+\parbox{2.35cm}{%
+
+\includegraphics[width=2cm,clip]{logo.png}
+
+}\parbox{\dimexpr\linewidth-2.8cm\relax}{
+\begin{tabularx}{\linewidth}{L r}
+  \textbf{\LARGE \name} & +91-\phone\\
+  {Roll No.:\roll} & \href{mailto:\emaila}{\emaila} \\
+  \course & \href{https://github.com/\github}{Github} $|$ \href{\website}{Website} \\
+ {Indian Institute Of Information Technology, Una} &  
+  \href{https://www.linkedin.com/in/\linkedin/}{linkedin.com/in/\linkedin}
+\end{tabularx}
+}
+
+
 
 %-----------EDUCATION-----------------
+% \section{Education}
+%   \resumeSubHeadingListStart
+%     \resumeSubheading
+%       {Indian Institute of Information Technology Una}{Himachal Pradesh, India}
+%       {Bachelor of Technology in Mathematics and Computing ;  GPA: 8.10}{July. 2015 -- July. 2019 (Expected)}
+%     \resumeSubheading
+%       {Burdwan Model School}{Burdwan, W.B}
+%       {Central Board of Secondary Education (Class XII);  Percentage: 96.60}{March. 2015}
+%   \resumeSubHeadingListEnd\vspace{-3mm}
 \section{Education}
-  \resumeSubHeadingListStart
-    \resumeSubheading
-      {Indian Institute of Information Technology, Una}{Una, Himachal Pradesh}
-      {Bachelor of Technology in Computer Science and Engineering }{Dec. 2021 -- July. 2025}
-    \resumeSubheading
-      {Sri Chaitanya Educational Institutions}{Vijayawada, India}
-      {XII;   (980/1000)}{May. 2019 -- April. 2021}
-    \resumeSubheading
-      {Sri Chaitanya Educational Institutions}{Rajahmahendravaram, India}
-      {X;   CGPA (10/10)}{May. 2018 -- April. 2019}
-  \resumeSubHeadingListEnd
-\smallskip
+\setlength{\tabcolsep}{5pt} % Default value: 6pt
+% \renewcommand{\arraystretch}{1.1} % Default value: 1
+\small{\begin{tabularx}
+{\dimexpr\textwidth-3mm\relax}{|c|C|c|c|}
+  \hline
+  \textbf{Degree/Certificate } & \textbf{Institute/Board} & \textbf{CGPA/Percentage} & \textbf{Year}\\
+  \hline
+  B.Tech  & Indian Institute of Information Technology, Una & 7.65 (Current) & 2021-Present\\
+  \hline
+  Senior Secondary & AP BIE Board & 98.0\% & 2019-21 \\
+  \hline
+  Secondary & AP SSC Board & 10.0 & 2018-19 \\
+  \hline
+\end{tabularx}}
+\vspace{-2mm}
 
-% %-----------EXPERIENCE-----------------
+%-----------EXPERIENCE-----------------
 % \section{Experience}
 %   \resumeSubHeadingListStart
 
 %     \resumeSubheading
-%       {Google}{Mountain View, CA}
-%       {Software Engineer}{Oct 2016 - Present}
+%       {XYZ Company Name}{Location}
+%       {XXXXXXXXXXX \& YYYYYYYYYYYY Intern}{May 2019 - Jul. 2019}
 %       \resumeItemListStart
-%         \resumeItem{Tensorflow}
-%           {TensorFlow is an open source software library for numerical computation using data flow graphs; primarily used for training deep learning models. Worked on APIs and performance for training models on Tensor Processing Units (TPU).}
-%         \resumeItem{Apache Beam}
-%           {Apache Beam is a unified model for defining both batch and streaming data-parallel processing pipelines, as well as a set of language-specific SDKs for constructing pipelines and runners.}
-%       \resumeItemListEnd
+%     \item {Work Done List 1}
+%     \item {Work Done List 2}
+%     % \item {More work done } .....
+%     \resumeItemListEnd
+    
+%     % \resumeSubheading
+%     %   {Company A}{Bengaluru, India}
+%     %   {API Developer \& Machine Learning Intern}{May. 2018 - Jul. 2018}
+%     %   \resumeItemListStart
+%     % \item {XXXXXXXXXXXXXXX}
+%     %     \item {YYYYYYYYYYYYYYYYYY}
+%     % \resumeItemListEnd
       
-% % --------Multiple Positions Heading------------
-% %    \resumeSubSubheading
-% %     {Software Engineer I}{Oct 2014 - Sep 2016}
-% %     \resumeItemListStart
-% %        \resumeItem{Apache Beam}
-% %          {Apache Beam is a unified model for defining both batch and streaming data-parallel processing pipelines}
-% %     \resumeItemListEnd
-% %    \resumeSubHeadingListEnd
-% %-------------------------------------------
-
-%     \resumeSubheading
-%       {Coursera}{Mountain View, CA}
-%       {Senior Software Engineer}{Jan 2014 - Oct 2016}
-%       \resumeItemListStart
-%         \resumeItem{Notifications}
-%           {Service for sending email, push and in-app notifications. Involved in features such as delivery time optimization, tracking, queuing and A/B testing. Built an internal app to run batch campaigns for marketing etc.}
-%         \resumeItem{Nostos}
-%           {Bulk data processing and injection service from Hadoop to Cassandra and provides a thin REST layer on top for serving offline computed data online.}
-%         \resumeItem{Workflows}
-%           {Dataduct an open source workflow framework to create and manage data pipelines leveraging reusables patterns to expedite developer productivity.}
-%         \resumeItem{Data Collection}
-%           {Designed the internal survey and crowd sourcing platform which allowed for creating various tasks for crowd sourcing or embedding surveys across the Coursera platform.}
-%         \resumeItem{Dev Environment}
-%           {Analytics environment based on docker and AWS, standardized the python and R dependencies. Wrote the core libraries that are shared by all data scientists.}
-%         \resumeItem{Data Warehousing}
-%           {Setup, schema design and management of Amazon Redshift. Built an internal app for access to the data using a web interface. Dataduct integration for daily ETL injection into Redshift.}
-%         \resumeItem{Recommendations}
-%           {Core service for all recommendation systems at Coursera, currently used on the homepage and throughout the content discovery process. Worked on both offline training and online serving.}
-%         \resumeItem{Content Discovery}
-%           {Improved content discovery by building a new onboarding experience on coursera. Using this to personalize the search and browse experience. Also worked on ranking and indexing improvements.}
-%         \resumeItem{Course Dashboards}
-%           {Instructor dashboards and learner surveying tools, which helped instructors run their class better by providing data on Assignments and Learner Activity.}
-%       \resumeItemListEnd
-
-%     \resumeSubheading
-%       {Lucena Research}{Atlanta, GA}
-%       {Data Scientist}{Summer 2012 and 2013}
-%       \resumeItemListStart
-%         \resumeItem{Portfolio Management}
-%           {Created models for portfolio hedging,  portfolio optimization and price forecasting. Also creating a strategy backtesting engine used for simulating and backtesting strategies.}
-%         \resumeItem{QuantDesk}
-%           {Python backend for a web application used by hedge fund managers for portfolio management.}
-%       \resumeItemListEnd
-
-%     \resumeSubheading
-%       {Georgia Institute of Technology}{Atlanta, GA}
-%       {Research and Teaching Assistant}{Jan 2012 - Dec 2013}
-%       \resumeItemListStart
-%         \resumeItem{Research Assistant - Machine Learning}
-%           {Research on machine learning for portfolio hedging and replication algorithms. Modeling low-risk \& continuous-return strategies. Developed the python library QSTK.}
-%         \resumeItem{Teaching Assistant - Computational Investing}
-%           {The online course on Coursera, had more than 100,000 students enrolled. It was featured on the 11 Alive News and the Atlanta Journal Constitution. Involved in creating assignment, exams and conducting recitation sessions. Also taught the on-campus version of the course.}
-%       \resumeItemListEnd
-
 %   \resumeSubHeadingListEnd
+\section{Experience}
+\resumeSubHeadingListStart
+
+\resumeProject
+  {Machine Learning Engineer Intern} % Job Title
+  {Snive.io, Bangalore} % Company
+  {Aug 2023 - April 2024} % Dates
+  {\href{https://www.krut.ai/}{krut.ai}} % Website
+\resumeItemListStart
+    \item {Optimized image generation pipelines with Mesh Graphormer and YOLO, reducing manual correction errors by 25\% and significantly enhancing image accuracy and quality.}
+    \item {Accelerated image generation speed from 45 seconds to 13 seconds on the SDXL model, achieving a threefold increase in inference speeds.}
+    \item {Designed and deployed AI features such as Object Remover, AI Upscaler, and Generative Fill, strictly adhering to AI safety protocols. This initiative boosted user engagement by 40\% and decreased editing time by 50\%.}
+    \item {\textit{Keywords: Large Language Models (LLMs), Diffusion Models, LoRA, Hugging Face Diffusers, Mesh Graphormer, YOLO, OpenCV, AWS, MLOps, AWS S3, AWS EC2, Object Remover, AI Upscaler, AI Generative Fill}}
+\resumeItemListEnd
 
 
-%-----------PROJECTS-----------------
-\section{Projects}
-  \resumeSubHeadingListStart
-    \resumeSubItem{Krishi-Mitra} {An Android app which helps farmers choose the best crops for their location, weather, and soil conditions. It also
-    recommends the optimal fertilizers for each crop. \\
-    Skills: Machine Leaning, Kotlin,Room Database,Recycler View}\\
-    \resumeSubItem{Fake News Classifier} {Detection Fake News based on a user query and display the results on a webpage using Flask\\ 
-    Skills: Machine Leaning , Flask, NLP, SMOTE (Synthetic Minority Oversampling Technique), Support Vector Classifier, Gensim, Sklearn, Pandas, Numpy, Seaborn, Wordcloud}
-    \resumeSubItem{Resume Selection Classifier}{ Designed a predictive model using naive bayes classifier for resume selection model; achieved 88 accuracy \\
-    Skills: Machine Learning, NLP, Naive Bayes Classifier, Gensim, Sklearn, Pandas, Numpy, Seaborn, Wordcloud}
- 
 
-  \resumeSubHeadingListEnd
-\smallskip
-\smallskip
-%--------PROGRAMMING SKILLS------------
-\section{Programming Skills}
- \resumeSubHeadingListStart
-     \resumeSubItem{Data tools and languages}{Python , C , C++, Kotlin , scikit-learn, MATLAB, Matplotlib ,Seaborn, Pandas, Firebase, NLP , Git/Github , Flask,HTML , CSS , JavaScript}
-     \resumeSubItem{Cloud technologies}{AWS, GCP}
-     \resumeSubItem{Operating System}{Windows,Linux}
-     \resumeSubItem{Databases}{MySQL}
-     \resumeSubItem{Courses}{Data Structures and Algorithms, Object Oriented Programming, Database Management,Machine Learning}
- \resumeSubHeadingListEnd
- \smallskip
-
- %-----------Achievements-----------------
-\section{Achievements and Coding Profiles}
-  \resumeSubHeadingListStart
-    \resumeSubItem{Codechef}{Two Star rated at 1568 , Division 3 in Codechef}
-    \resumeSubItem{Pre-RMO Olympiad} {Qualified for Pre-RMO(Pre-Regional Mathematical Olympiad) and appeared for RMO(Regional Mathematics Olympiad) conducted by The National Board for Higher Mathematics has named the Homi Bhabha Centre for Science Education (HBCSE)} 
-  
-
-  \resumeSubHeadingListEnd 
-
-\smallskip
-%--------Extra-Curricular Activities----------
-\section{Extra-Curricular Activities} 
-
- \resumeSubHeadingListStart
-   \resumeSubItem{EUNOIA Club}{(Unified Literary and Cultural club of IIIT Una) I contribute to the blog and Instagram of EUNOIA club, which fosters literary and cultural activities at IIIT Una at \href{https://www.instagram.com/eunoia.iiitu}{Instagram} }
-   \resumeSubItem{Volunteeer activities}{Volunteered the Events organised for Tech Fest Meraki at IIIT UNA}
 \resumeSubHeadingListEnd
 
-% %----------- HOBBIES -----------
 
-% \section{Hobbies}
-%   \resumeSubHeadingListStart
-%     \small{\item{Community Involvement ,Travel}}
+\vspace{-5.5mm}
+%-----------PROJECTS-----------------
+% \section{Projects}
+% \resumeSubHeadingListStart
+    
+%     \resumeProject
+%       {Project Name} %Project Name
+%       {Professors Name/Event Name/Club Name} %Project Name, Location Name
+%       {Nov. 2018 - Dec. 2018} %Event Dates
+%       {\href{Link to github}{Github}} %Website
+%       \resumeItemListStart
+%         \item {Project Work Done 1}
+%         \item {Project Work Done 2}
+%     \resumeItemListEnd
+    
+%     % \resumeProject
+%     %   {Project Name 2}
+%     %   {6th Inter IIT TechMeet, IIT Madras}{Dec. 2017 - Jan. 2018}{\href{Links to Reports}{Reports}}
+%     %   \resumeItemListStart
+%     % \item {Work DOne 1}
+%     %     \item {Work Done 2}
+%     % \resumeItemListEnd
+      
 %   \resumeSubHeadingListEnd
 
+\section{Projects}
+\resumeSubHeadingListStart
+    
+\resumeProject
+  {Krishi Mitra} % Project Name
+  {Google X AMD GFG All India Hackathon} % Event Name
+  {March 2023 - April 2023} % Event Dates
+  {\href{https://github.com/adword01/Krishi-Mitra.git}{Github}} % Website
+  \resumeItemListStart
+    \item {Engineered a robust application for the Google X AMD GFG All India Hackathon, achieving regional qualification from over 500 teams, demonstrating advanced coding and teamwork skills.
+.}
+    \item {Implemented a Random Forest Classifier to provide crop recommendations based on soil characteristics, weather conditions, and crop yield data achieving 99\% accuracy, enhancing agricultural decision-making.}
+    \item {Created an API using \href{https://krishimitra-0102.ue.r.appspot.com/docs}{FASTAPI} to deploy and test the model on Google Cloud Platform (GCP), ensuring scalability and reliability.}
+    \item {Keywords: FastAPI, Random Forest Classifier, GCP, REST APIs.}
+  \resumeItemListEnd
+
+\resumeProject
+  {Fake News Classifier} % Project Name
+  {} % No Event Name
+  {January 2023 - April 2023} % Event Dates
+  {\href{https://github.com/0xSushmanth/fake-news-classifier}{Github}} % Website
+  \resumeItemListStart
+    \item {Engineered a classifier to distinguish between fake and real news articles using advanced machine learning models achieved 98\% accuracy , improving information reliability.}
+    \item {Deployed the model using \href{https://fakenews-0012.et.r.appspot.com/docs}{FASTAPI} on Google Cloud Platform (GCP), ensuring robust and efficient testing.}
+    \item {Keywords: Naive Bayes, XGBoost, Random Forest, Decision Trees, Logistic Regression, FastAPI, GCP.}
+  \resumeItemListEnd
+
+    
+\resumeSubHeadingListEnd
+\vspace{-5.5mm}
+
+
+% \section{Technical Skills}
+%  \resumeHeadingSkillStart
+%   \resumeSubItem{Programming} % Category
+%     {Python, C/C++, Java}
+%  \resumeSubItem{Category XYZ} % Category
+%     {Skill A, Skill B, Skill C} % Skills
+% %  \resumeSubItem{Tools/Frameworks} % Category
+% %     {Keras, Tensorflow, Pytorch*, ROS, OpenCV}
+% %  \resumeSubItem{Operating Systems}
+% %  {Windows, Linux*} 
+% \hfill \textit{\footnotesize{* Elementary proficiency}} \hspace{3mm}
+%  \resumeHeadingSkillEnd
+
+\section{Technical Skills}
+\resumeHeadingSkillStart
+  \resumeSubItem{Programming Languages}
+    {Python (Advanced), C/C++ (Intermediate)}
+  \resumeSubItem{Machine Learning Frameworks/Libraries}
+    {PyTorch, TensorFlow, OpenCV}
+  \resumeSubItem{Deep Learning}
+    {Neural Networks, Convolutional Neural Networks (CNNs), Recurrent Neural Networks (RNNs)}
+  \resumeSubItem{Natural Language Processing (NLP)}
+    {NLTK, Huggingface Transformers,LangChain}
+  \resumeSubItem{Machine Learning Operations}
+    {Docker, Kubernetes}
+  \resumeSubItem{Cloud Platforms}
+    {AWS (EC2, S3, SageMaker), Google Cloud Platform (GCP)}
+  \resumeSubItem{Version Control}
+    {Git, GitHub}
+  \resumeSubItem{Database Systems}
+    {MongoDB}
+  \resumeSubItem{Tools/Frameworks}
+    {HuggingFace, FastAI, FastAPI}
+% \hfill \textit{\footnotesize{* Elementary proficiency}} \hspace{3mm}
+\resumeHeadingSkillEnd
+
+
+
+
+\section{Key Courses Taken}
+\resumeHeadingSkillStart
+ \resumeSubItem{Mathematics} % Category
+    {Linear Algebra, Calculus, Discrete Maths, Probability \& Random Processes}
+ \resumeSubItem{Coursework} % Category
+    {C Programming, OOPs, Design and Analysis of Algorithms, Data Structures \& Algorithms, Operating System, Computer Network, Database Management System (DBMS), Machine Learning \& Deep Learning}
+ \resumeSubItem{Certifications} % Category
+    {Machine Learning Specialization Course by Andrew NG on \textit{\href{https://www.coursera.org/account/accomplishments/specialization/certificate/E3SC4AVDZXPE}{\textcolor{blue}{Coursera}}}}
+\resumeHeadingSkillEnd
+
+
+
+% \section{Positions of Responsibility}
+% \vspace{-0.4mm}
+% \resumeSubHeadingListStart
+% \resumePOR{Secretary} % Position
+%     {XYZ Club, IIIT Una} %Club,Event
+%     {Apr. 2018 - Apr. 2019} %Tenure Period
+% \resumeSubHeadingListEnd
+% \vspace{-4mm}
+
+
+\section{Achievements}
+\vspace{-0.2mm}
+\resumeSubHeadingListStart
+\resumePOR{Pre-RMO Olympiad} % Award
+    {Qualified and appeared for RMO (Regional Mathematics Olympiad) by HBCSE} % Description
+    {2019} % Year
+\resumePOR{Solving for India Hackathon} % Award
+    {\href{https://drive.google.com/file/d/1l458RtE9WB3WVtVLVn0uMJJE1zTLWra0/view?usp=sharing}{\textcolor{blue}{Qualified}} for the Regional round conducted by GeeksforGeeks} % Description
+    {2023} % Year
+% \resumePOR{Bronze Medal} % Award
+%     {XYZ Challenge, ABC Company, FGH City} % Event
+%     {2018} % Event Year
+\resumeSubHeadingListEnd
+
+\vspace{-2mm}
+\hspace*{-5mm}\rule{1.035\textwidth}{0.1mm}
 
 
 %-------------------------------------------
