@@ -13,8 +13,19 @@ jobs:
         with:
           root_file: main.tex
         
+      - name: Create a tag
+        id: tag_version
+        run: |
+          BASE_VERSION="v1.0"
+          COMMIT_HASH=$(git rev-parse --short HEAD)
+          TAG_NAME="$BASE_VERSION-$COMMIT_HASH"
+          echo ::set-output name=tag::$TAG_NAME
+          git tag $TAG_NAME
+          git push origin $TAG_NAME
+        
       - name: Upload PDF to GitHub Releases
         id: upload_release
         uses: softprops/action-gh-release@v1
         with:
-          files: resume.pdf
+          files: main.pdf
+          tag_name: ${{ steps.tag_version.outputs.tag }}
